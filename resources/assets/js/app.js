@@ -1,3 +1,6 @@
+import 'onsenui/css/onsenui.css';
+import 'onsenui/css/onsen-css-components.css';
+import VueOnsen from 'vue-onsenui';
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -8,6 +11,8 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+
+Vue.use(VueOnsen);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

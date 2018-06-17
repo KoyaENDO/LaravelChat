@@ -1,35 +1,35 @@
 <template>
-    <div>
-        <Talk
-                :timeline="state.timeline"
-                :user-id="state.userId"
+    <v-ons-page>
+        <v-ons-toolbar>
+            <div class="center">SimpleChat</div>
+        </v-ons-toolbar>
+
+        <v-ons-tabbar
+                swipeable
+                tab-border
+                position="top"
+                :tabs="tabs"
         />
-        <Message
-                :user-id="state.userId"
-                :input-text="state.inputText"
-        />
-    </div>
+    </v-ons-page>
 </template>
 <script>
-    import Message from "./Message";
-    import Talk from "./Talk";
-    import store from "../store";
+    import Top from "./Top";
+    import Chat from "./Chat";
     export default {
-        components: {Talk, Message},
+        components: {Top, Chat},
         data() {
             return {
-                state: store.state
+                tabs: [
+                    {
+                        page: Top,
+                        label: 'Top'
+                    },
+                    {
+                        page: Chat,
+                        label: 'Chat'
+                    }
+                ]
             };
-        },
-        mounted() {
-            this.connectChannel();
-        },
-        methods: {
-            connectChannel() {
-                Echo.channel("simple-chat-channel").listen("MessagePostEvent", e => {
-                    store.receiveMessage(e.messages);
-                });
-            }
         }
     };
 </script>
